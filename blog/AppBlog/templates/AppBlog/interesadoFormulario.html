@@ -1,0 +1,23 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+
+<!-- Page content-->
+{% block main %}
+<h1>¿Estás interesado en un servicio de consultoría?</h1>
+<h2>Formulario</h2>
+{% if miFormulario.errors %}
+<p style="color:red;"> Están mal los datos, revisar </p>
+{% endif %}
+<form action="" method="POST" id="id-addSnippet">
+    {% csrf_token %}
+
+    <table>
+        {{miFormulario.as_table}}
+    </table>
+    
+    <input type = "submit" value="Enviar">
+</form>
+{% endblock main %}
