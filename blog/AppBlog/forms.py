@@ -5,4 +5,6 @@ class InteresadoFormulario(forms.Form):
     email = forms.EmailField(max_length=40)
     organizacion = forms.CharField(max_length=40)
     cuit = forms.CharField(max_length=40)
-    comentanos_tu_interes = forms.CharField(max_length=200)
+
+class ConsultoriaForm(forms.Form):
+    servicio = forms.CharField(max_length=40)

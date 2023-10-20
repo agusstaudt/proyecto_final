@@ -7,14 +7,11 @@ class Usuario(models.Model):
     email = models.EmailField(max_length=40)
 
 class Interesado(models.Model):
-    nombre = models.CharField(max_length=40)
-    apellido = models.CharField(max_length=20)
-    email = models.EmailField(max_length=40)
-    organizacion = models.CharField(max_length=40)
-    cuit = models.CharField(max_length=40)
-    comentario_interes = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=40, default='nombre')
+    apellido = models.CharField(max_length=20, default='apellido')
+    email = models.EmailField(max_length=40, default='mail')
+    organizacion = models.CharField(max_length=40, default='org')
+    cuit = models.CharField(max_length=40, default='cuit')
 
-# class Profesor(models.Model):
-#     nombre = models.CharField(max_length=40)
-#     apellido = models.CharField(max_length=20)
-#     email = models.EmailField(max_length=40)
+class Consultoria(models.Model):
+    servicio = models.CharField(max_length=40)

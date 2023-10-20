@@ -19,8 +19,7 @@ def interesadoFormulario(request):
                                apellido=informacion["apellido"], 
                                email=informacion["email"], 
                                organizacion=informacion["organizacion"], 
-                               cuit=informacion["cuit"], 
-                               comentario_interes=informacion["comentario_interes"])
+                               cuit=informacion["cuit"])
             curso.save()
             return render(request, "AppBlog/index.html")
     else:
