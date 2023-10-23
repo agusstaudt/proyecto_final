@@ -1,0 +1,21 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+
+<!-- Page content-->
+{% block main %}
+<h1>Interesados en contratar un servicio de consultoría</h1>
+{% for p in interesados %}
+    <li>{{p}}</li>
+        <button>
+            <a href="{% url 'EliminarInteresado' p.id %}">Eliminar</a>
+        </button>
+{% endfor %}
+<br>
+<br>
+<button>
+    <a href="interesado/">Agregar otra persona interesada</a>
+</button>
+{% endblock main %}

@@ -6,16 +6,16 @@
 
 <!-- Page content-->
 {% block main %}
-<h1>Formulario</h1>
-<h2>¿Estás interesado en un servicio de consultoría?</h2>
-{% if miFormulario.errors %}
+<h1>¿Qué servicio de consultoría te interesa?</h1>
+<h2>Formulario</h2>
+{% if miFormularioConsultoria.errors %}
 <p style="color:red;"> Están mal los datos, revisar </p>
 {% endif %}
 <form action="" method="POST" id="id-addSnippet">
     {% csrf_token %}
 
     <table>
-        {{miFormulario.as_table}}
+        {{miFormularioConsultoria.as_table}}
     </table>
     
     <input type = "submit" value="Enviar">

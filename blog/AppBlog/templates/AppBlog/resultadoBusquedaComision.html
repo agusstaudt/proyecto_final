@@ -1,0 +1,22 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+
+<!-- Page content-->
+{% block main %}
+<h1>Resultados</h1>
+
+<ul>
+    {% for taller in talleres %}
+    <li>
+        <i>Nombre del taller:</i>
+        <i style="color: blue;"> {{taller.taller}} </i>
+        <i> - Comisión n°: </i>
+        <i style="color: blue;"> {{taller.comision}} </i>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock main %}
