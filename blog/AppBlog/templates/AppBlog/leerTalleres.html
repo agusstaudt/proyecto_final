@@ -6,16 +6,17 @@
 
 <!-- Page content-->
 {% block main %}
-<h1>Interesados en contratar un servicio de consultoría</h1>
-{% for p in interesados %}
+<h1>Talleres a dictar</h1>
+{% for p in talleres %}
     <li>{{p}}</li>
         <button>
-            <a href="{% url 'EliminarInteresado' p.id %}">Eliminar</a>
+            <a href="{% url 'EliminarTalleres' p.id %}">Eliminar</a>
+            <a href="{% url 'EditarTaller' p.id %}">Editar</a>
         </button>
 {% endfor %}
 <br>
 <br>
 <button>
-    <a href="interesado/">Agregar otra persona interesada</a>
+    <a href="talleres">Agregar otro taller</a>
 </button>
 {% endblock main %}

@@ -14,4 +14,8 @@ class InteresadoTall(forms.Form):
 
 class BuscaTallerForm(forms.Form):
     taller = forms.CharField(max_length=40)
+
+class TallerForm(forms.Form):
+    taller = forms.CharField(max_length=40)
+    comision = forms.CharField(max_length=20)
  
