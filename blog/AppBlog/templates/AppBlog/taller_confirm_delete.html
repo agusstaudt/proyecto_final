@@ -1,0 +1,16 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+<!-- Page content-->
+{% block main %}
+
+<form method="POST">
+    {% csrf_token %}
+    ¿Estas seguro que deseas borrar el curso de "{{ object }}"?
+       
+    <input type = "submit" value="Borrar">
+</form>
+
+{% endblock main %}

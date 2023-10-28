@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from AppBlog.models import Interesado, Taller ,InteresadoTalleres
 from AppBlog.forms import InteresadoFormulario, InteresadoTall, BuscaTallerForm, TallerForm
 # Create your views here.
@@ -110,5 +114,33 @@ def editTaller(request, taller_id):
         taller = Taller.objects.get(id=taller_id)
         miFormulario = TallerForm(initial={'taller': taller.taller})
     return render(request, "AppBlog/interesadosTalleres.html", {"miFormularioTalleres": miFormulario})
-# seguir video en 1:16
 ## cambiar el link en reservar un demo para que lleve a un html con ambos links, de interesado para consultoria e interesado para taller
+
+
+############ clases basadas en vistas
+class TallerListView(ListView):
+    model = Taller
+    template_name = "AppBlog/lista.html"
+
+class TallerDetailView(DetailView):
+    model = Taller
+    template_name = "AppBlog/taller_detalle.html"
+
+class TallerCreateView(CreateView):
+    model = Taller
+    template_name = "AppBlog/taller_form.html"
+    success_url = reverse_lazy("Lista")
+    fields = ['taller', 'comision']
+
+class TallerUpdateView(UpdateView):
+    model = Taller
+    template_name = "AppBlog/taller_edit.html"
+    success_url = reverse_lazy("Lista")
+    fields = ['taller', 'comision']
+
+class TallerDeleteView(DeleteView):
+    model = Taller
+    template_name = "AppBlog/taller_confirm_delete.html"
+    success_url = reverse_lazy("Lista")
+    
+

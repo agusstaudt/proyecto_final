@@ -1,0 +1,27 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+<!-- Page content-->
+{% block main %}
+
+{% for taller in object_list %}
+<li>
+    <i>Nombre del taller:</i>
+    <i style="color: blue;"> {{taller.taller}} </i>
+    <i> - Comisión n°: </i>
+    <i style="color: blue;"> {{taller.comision}} </i>
+    <button>
+        <a href="{% url 'Detalles' taller.id %}">Ver</a>
+    </button>
+    <button>
+        <a href="{% url 'Eliminar' taller.id %}">Eliminar</a>
+    </button>
+    <button>
+        <a href="{% url 'EditarTaller' taller.id %}">Editar</a>
+    </button>
+</li>
+{% endfor %}
+
+{% endblock main %}

@@ -1,0 +1,16 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+
+<!-- Page content-->
+{% block main %}
+<h1>¿Qué servicio de consultoría te interesa?</h1>
+<h2>Formulario taller</h2>
+<form action="" method="POST" id="id-addSnippet">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type = "submit" value="Enviar">
+</form>
+{% endblock main %}

@@ -13,3 +13,12 @@ urlpatterns = [
     path('eliminarTalleres/<int:taller_id>/', views.eliminarTalleres, name="EliminarTalleres"),
     path('editarTaller/<int:taller_id>/', views.editTaller, name="EditarTaller")
 ]
+
+# URL's basadas en clases
+urlpatterns += [
+    path('clases/lista/', views.TallerListView.as_view(), name="Lista"),
+    path('clases/detalle/<int:pk>/', views.TallerDetailView.as_view(), name="Detalles"),
+    path('clases/nuevo/', views.TallerCreateView.as_view(), name="Nuevo"),
+    path('clases/editar/<int:pk>/', views.TallerUpdateView.as_view(), name="Editar"),
+    path('clases/eliminar/<int:pk>/', views.TallerDeleteView.as_view(), name="Eliminar"),
+]

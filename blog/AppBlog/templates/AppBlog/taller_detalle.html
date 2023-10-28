@@ -1,0 +1,19 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+<!-- Page content-->
+{% block main %}
+
+<li>
+    <i>Nombre del taller:</i>
+    <i style="color: blue;"> {{taller.taller}} </i>
+    <i> - Comisión n°: </i>
+    <i style="color: blue;"> {{taller.comision}} </i>
+    <button>
+        <a href="{% url 'Lista'  %}">Regresar</a>
+    </button>
+</li>
+
+{% endblock main %}
