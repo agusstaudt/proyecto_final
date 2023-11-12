@@ -1,4 +1,4 @@
-{% extends 'AppBlog/baseLogin.html' %}
+{% extends 'AppBlog/baseGetIn.html' %}
 
 {% load static %}
 
@@ -47,29 +47,26 @@
                         </div>
                     </div>
                     <!-- Categories widget-->
-                    <!-- Categories widget -->
-<div class="card mb-4">
-    <div class="card-header">Talleres disponibles</div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-6">
-                <ul class="list-unstyled mb-0">
-                    <li><a href="{% url 'confirmarInscripcion' 'Desarrollo Web' %}">Desarrollo web</a></li>
-                    <li><a href="{% url 'confirmarInscripcion' 'Data analytics' %}">Data analytics</a></li>
-                    <li><a href="{% url 'confirmarInscripcion' 'Ciencia de datos' %}">Ciencia de datos</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-6">
-                <ul class="list-unstyled mb-0">
-                    <li><a href="{% url 'confirmarInscripcion' 'Tópicos en estadística aplicada' %}">Estadística aplicada</a></li>
-                    <li><a href="{% url 'confirmarInscripcion' 'Evaluacion de impacto de políticas públicas' %}">Evaluacion de impacto de políticas públicas</a></li>
-                    <li><a href="{% url 'confirmarInscripcion' 'Econometría' %}">Econometría</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
+                    <div class="card mb-4">
+                        <div class="card-header">Talleres disponibles</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="{% url 'confirmarInscripcion' 'Desarrollo Web' %}">Desarrollo web</a></li>
+                                        <li><a href="{% url 'confirmarInscripcion' 'Data analytics' %}">Data analytics</a></li>
+                                        <li><a href="{% url 'confirmarInscripcion' 'Ciencia de datos' %}">Ciencia de datos</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <li><a href="{% url 'confirmarInscripcion' 'Tópicos en estadística aplicada' %}">Estadística aplicada</a></li>
+                                        <li><a href="{% url 'confirmarInscripcion' 'Evaluacion de impacto de políticas públicas' %}">Evaluacion de impacto de políticas públicas</a></li>
+                                        <li><a href="{% url 'confirmarInscripcion' 'Econometría' %}">Econometría</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- Side widget-->
                     <div class="card mb-4">

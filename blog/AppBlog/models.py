@@ -17,14 +17,33 @@ class Interesado(models.Model):
     def __str__(self):
         return f"Nombre: {self.nombre} - Apellido: {self.apellido} - E-Mail: {self.email} - Organización: {self.organizacion} - CUIT: {self.cuit} - Servicio: {self.servicio}"
 ## Talleres disponibles
+class TallerBase(models.Model):
+    nombre = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.nombre
+class IncripcionTaller(models.Model):
+    nombre = models.CharField(max_length=40)
+    taller = models.ForeignKey(TallerBase, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Nombre: {self.nombre} - Taller: {self.taller.nombre}"
+    
 class Taller(models.Model):
     taller = models.CharField(max_length=40, default='Otros')
     comision = models.CharField(max_length=40, default='1234')
     def __str__(self):
         return f"Taller: {self.taller} - Comisión: {self.comision}" 
+## Talleres disponibles
+class TallerInscriptos(models.Model):
+    nombre = models.CharField(max_length=40, default='faltante')
+    taller = models.CharField(max_length=40, default='varios')
+    def __str__(self):
+        return f"Nombre: {self.nombre} - Taller: {self.taller}" 
+
 ## Interesados en talleres
 class InteresadoTalleres(models.Model):
-    nombre = models.CharField(max_length=40, default='faltante')
+    nombre = models.CharField(max_length=40, default='Tu nombre')
     taller = models.CharField(max_length=40, default='varios')
     def __str__(self):
         return f"Nombre: {self.nombre} - Taller: {self.taller}" 

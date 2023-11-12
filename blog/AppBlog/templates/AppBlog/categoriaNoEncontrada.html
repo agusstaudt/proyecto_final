@@ -1,0 +1,12 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+<h2>{{mensaje}}</h2>
+<!-- Page content-->
+{% block main %}
+<h1>Categoría No Encontrada</h1>
+<p>La categoría que estás buscando no se encontró en nuestro sistema.</p>
+<p>Por favor, verifica la URL o regresa a la página principal.</p>
+{% endblock main %}

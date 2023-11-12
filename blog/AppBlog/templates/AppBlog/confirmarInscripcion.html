@@ -1,0 +1,29 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+<!-- Page content-->
+{% block main %}
+
+<div class="card mb-4">
+    <div class="card-header">Talleres disponibles</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <ul class="list-unstyled mb-0">
+                    <a href="{% url 'confirmarInscripcion' nombre_taller=nombre_taller|urlencode %}">Inscribirse</a>
+                    <!-- Otros talleres aquí -->
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <ul class="list-unstyled mb-0">
+                    <!-- Otros talleres aquí -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock main %}

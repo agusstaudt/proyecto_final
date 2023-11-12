@@ -1,0 +1,16 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+<h2>{{mensaje}}</h2>
+<!-- Page content-->
+{% block main %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrate!</button>
+     </form>
+    
+    
+{% endblock main %}

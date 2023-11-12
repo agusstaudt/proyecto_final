@@ -1,0 +1,16 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+<h2>{{mensaje}}</h2>
+<!-- Page content-->
+{% block main %}
+<h2>Inicia sesión para poder disfutar de contenido exclusivo</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Inciar sesion</button>
+    </form>
+    ¿Aún no te has registrado? <a href="{% url 'Register' %}">Registrate!</a>
+{% endblock main %}

@@ -1,11 +1,65 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from AppBlog.models import Interesado, Taller ,InteresadoTalleres
-from AppBlog.forms import InteresadoFormulario, InteresadoTall, BuscaTallerForm, TallerForm
+from django.urls import reverse_lazy, reverse
+from AppBlog.models import *
+from AppBlog.forms import *
+# to login, registar and log out
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+# funcion login 
+def login_request(request):
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():  # Si pasó la validación de Django
+
+            usuario = form.cleaned_data.get('username')
+            clave = form.cleaned_data.get('password')
+
+            nombre_usuario = authenticate(username=usuario, password=clave)
+
+            if nombre_usuario is not None:
+                login(request, nombre_usuario)
+
+                return render(request, "AppBlog/indexGetIn.html", {"mensaje":f"Bienvenido {usuario}"})
+            else:
+                form = AuthenticationForm()
+                return render(request, "AppBlog/index.html", {"mensaje":"Datos incorrectos", 'form':form})
+           
+        else:
+
+            return render(request, "AppBlog/index.html", {"mensaje":"Usuario y/o contraseña incorrecto"})
+
+    form = AuthenticationForm() # crea el formulario
+
+    return render(request, "AppBlog/login.html", {"form": form})
+
+# Vista de registro
+def register(request):
+
+      if request.method == 'POST':
+
+            #form = UserCreationForm(request.POST)
+            form = UserRegisterForm(request.POST)
+            if form.is_valid():
+
+                  username = form.cleaned_data['username']
+                  form.save()
+                  return render(request,"AppBlog/indexGetIn.html" ,  {"mensaje":f"Usuario Creado. Bienvenido {username} :)"})
+
+      else:
+            #form = UserCreationForm()       
+            form = UserRegisterForm()     
+
+      return render(request,"AppBlog/registro.html" ,  {"form":form})
+
 # Create your views here.
 def inicio(request):
     return render(request, "AppBlog/index.html")
@@ -14,6 +68,7 @@ def usuario(request):
     return HttpResponse("Vista usuario")
 # definimos formulario de interesados en los servicios del blog
 ## servicio de consultoria
+@login_required
 def interesadoFormulario(request):
     if request.method == "POST":
         miFormulario = InteresadoFormulario(request.POST) # Aqui me llega la informacion del html
@@ -81,6 +136,7 @@ def agregarTaller(request):
     else:
         miFormulario = TallerForm()
     return render(request, "AppBlog/talleresFormulario.html", {"miFormulario": miFormulario})
+
 # CRUD 
 ## lectura de talleres
 def leerTalleres(request):
@@ -116,15 +172,14 @@ def editTaller(request, taller_id):
     return render(request, "AppBlog/interesadosTalleres.html", {"miFormularioTalleres": miFormulario})
 ## cambiar el link en reservar un demo para que lleve a un html con ambos links, de interesado para consultoria e interesado para taller
 
-
 ############ clases basadas en vistas
-class TallerListView(ListView):
+class TallerListView(LoginRequiredMixin, ListView):
     model = Taller
-    template_name = "AppBlog/lista.html"
+    template_name = "AppBlog/listaTalleresUsuario.html"
 
 class TallerDetailView(DetailView):
     model = Taller
-    template_name = "AppBlog/taller_detalle.html"
+    template_name = "AppBlog/tallerDetalle.html"
 
 class TallerCreateView(CreateView):
     model = Taller
@@ -143,4 +198,21 @@ class TallerDeleteView(DeleteView):
     template_name = "AppBlog/taller_confirm_delete.html"
     success_url = reverse_lazy("Lista")
     
+### Inscripción a un taller
+def inscribirse_curso(request):
+    return render(request, 'AppBlog/index.html')
 
+def confirmar_inscripcion(request, nombre_taller):
+    taller = get_object_or_404(TallerBase, nombre=nombre_taller)
+
+    if request.method == 'POST':
+        form = IncripcionTallerForm(request.POST)
+        if form.is_valid():
+            nombre_usuario = form.cleaned_data['nombre']
+            inscripcion = IncripcionTaller(nombre=nombre_usuario, taller=taller)
+            inscripcion.save()
+            return render(request, 'AppBlog/inscripcionExitosa.html', {'nombre': nombre_usuario, 'taller': taller})
+    else:
+        form = IncripcionTallerForm()
+
+    return render(request, 'AppBlog/confirmarInscripcion.html', {'taller': taller, 'form': form})

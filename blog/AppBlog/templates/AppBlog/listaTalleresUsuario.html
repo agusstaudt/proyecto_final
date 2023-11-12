@@ -1,0 +1,19 @@
+{% extends 'AppBlog/base.html' %}
+
+{% load static %}
+
+{% block title %} AS {% endblock title %}
+<!-- Page content-->
+{% block main %}
+
+{% for taller in object_list %}
+<li>
+    <i>Nombre del taller:</i>
+    <i style="color: blue;"> {{taller.taller}} </i>
+    <button>
+        <a href="{% url 'Detalles' taller.id %}">Ver</a>
+    </button>
+</li>
+{% endfor %}
+
+{% endblock main %}

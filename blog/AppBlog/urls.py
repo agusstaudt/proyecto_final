@@ -1,5 +1,6 @@
 from django.urls import path
 from AppBlog import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('inicio/', views.inicio, name="Inicio"),
@@ -21,4 +22,18 @@ urlpatterns += [
     path('clases/nuevo/', views.TallerCreateView.as_view(), name="Nuevo"),
     path('clases/editar/<int:pk>/', views.TallerUpdateView.as_view(), name="Editar"),
     path('clases/eliminar/<int:pk>/', views.TallerDeleteView.as_view(), name="Eliminar"),
+]
+
+# Inscripción a talleres
+urlpatterns += [
+    # path('cursos/', views.listar_cursos, name='listar_cursos'),
+    path('confirmar_inscripcion/<str:nombre_taller>/', views.confirmar_inscripcion, name='confirmarInscripcion'),
+    path('inscribirse_curso/', views.inscribirse_curso, name='inscribirseCurso'),
+    # path('inscripcion_exitosa/', views.inscripcion_exitosa, name='inscripcion_exitosa'),
+]
+# URL login y registro
+urlpatterns += [
+    path('login', views.login_request, name="Login"),
+    path('register', views.register, name='Register'),
+    path('logout', LogoutView.as_view(template_name='AppBlog/index.html'), name='Logout'),
 ]

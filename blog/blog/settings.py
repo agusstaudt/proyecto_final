@@ -116,3 +116,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = '/app/login' # si no comienza con barra se anexa a la URL anterior, la barra pisa y comienza de nuevo el link
